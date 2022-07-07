@@ -1,0 +1,48 @@
+ <!-- As a link -->
+ <nav class="navbar navbar-light bg-dark " >
+    <a class="navbar-brand  " href="#" style="color:rgb(245, 88, 40);"><b> DAILY REMINDER </b></a>
+    <span class="quote text-light">Reminding you all day</span>
+  </nav>
+  
+
+  <div class="container col-md-12 mt-0">
+      <div class="d-flex justify-content-center h-100">
+          <div class="card">
+              <div class="card-header">
+                  <h3 class="text-center">REMINDER FORM</h3>
+                  
+              </div>
+              <div class="card-body">
+                  <form onsubmit="event.preventDefault();bank.authenticate()">
+                      <div class="input-group form-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="date" [(ngModel)]='date' placeholder="Event Date" id="entered_date" required>
+                          
+                      </div>
+
+
+                      
+                      <div class="input-group form-group">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-info"></i></span>
+                          </div>
+                          <input type="text" class="form-control" name="description" [(ngModel)]='description' placeholder="Event Description" id="entered_description" required>
+                      </div>
+
+                      <br>
+                      
+                      <div class="form-group">
+
+                        <input type="submit" value="VEIW EVENTS" (click)="veiwevent()" class="btn float-left login_btn " style="width:45%" >
+
+                         <input type="submit" value="ADD EVENT" (click)="addevent()" class="btn float-right login_btn " style="width:45%" >
+
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </div>
+
