@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DataService } from '../service/data.service';
+
 
 @Component({
   selector: 'app-login',
@@ -7,46 +10,46 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+  uid = ""
+  pswd = ""
 
-acno=""
-pswd=""
-db:any = {
-  1000:{"acno":1000,"username":"Ajin","password":1000}
-}
-
-  constructor(private router:Router) { }
+  loginForm = this.fb.group({
+    uid: ['', [Validators.required, Validators.pattern('[0-9]*')]],
+    pswd: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]]
+  })
+  constructor(private router: Router, private ds:DataService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
-  //user defined functions
-acnoChange(event:any){
-  this.acno=event.target.value
-}
-pswdChange(event:any){
-  this.pswd=event.target.value
-}
+  login() {
+    var uid = this.loginForm.value.uid
+    var pswd = this.loginForm.value.pswd
 
+    if (this.loginForm.valid) {
+       this.ds.login(uid, pswd)
+      .subscribe((result:any)=>{
+        if (result){
+          localStorage.setItem('currentUser',result.currentUser)
+          localStorage.setItem('currentUid',result.currentUid)
+          localStorage.setItem('token',result.token)
 
+          alert(result.message)
+          this.router.navigateByUrl('dashboard')
 
-  login(){
-    var acno = this.acno
-    var pswd = this.pswd
-
-    let db=this.db
-    if (acno in db){
-      if (pswd == db[acno]["password"]){
-alert("Loged in Successfully")
-
-this.router.navigateByUrl('dashboard')
+        }
+      },
+      result=>{
+        alert(result.error.message)
       }
-      else{
-        alert("Incorrect Password")
-      }
+      )
+      
     }
-      else{
-        alert("User doesnot exist")
-     
+    else{
+      alert("Invalid Form")
     }
+
+  
   }
 }

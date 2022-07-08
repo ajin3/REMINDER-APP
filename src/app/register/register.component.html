@@ -13,34 +13,36 @@
                   
               </div>
               <div class="card-body">
-                  <form >
+                  <form [formGroup]="registerForm" (ngSubmit)="register()">
 
                     <div class="input-group form-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" class="form-control" name="uname" [(ngModel)]='uname' placeholder="Username" id="login_user" required>
+                        <input type="text" class="form-control" name="uname" formControlName="uname" placeholder="Username" id="login_user" required>
                         
                     </div>
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fa fa-id-badge"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="acno" [(ngModel)]='acno' placeholder="User I.D" id="login_accno" required>
+                          <input type="text" class="form-control" name="uid" formControlName="uid" placeholder="User I.D" id="login_user_id" required>
                           
                       </div>
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-key"></i></span>
                           </div>
-                          <input type="password" class="form-control" name="pswd" [(ngModel)]='pswd' placeholder="Password" id="login_password" required>
+                          <input type="password" class="form-control" name="pswd" formControlName="pswd" placeholder="Password" id="login_password" required>
                       </div>
                       
                       <div class="form-group">
-                          <input type="submit" value="REGISTER" (click)="register()" class="btn float-right login_btn " style="width:50%" >
+                        <br>
+                          <input type="submit" value="REGISTER"  class="btn float-right login_btn " style="width:50%" >
                       </div>
                   </form>
               </div>
+              
               <p style="color:white;align-items:baseline;">Already existing user ? <a routerLink="">LOG IN</a></p>
           </div>
       </div>
