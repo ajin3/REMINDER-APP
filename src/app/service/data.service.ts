@@ -41,16 +41,15 @@ export class DataService {
    return this.http.post('http://localhost:3000/register',data)
   }
 
-  //deposit
+  //addevent
 
-  deposit(acno: any, password: any, amt: any) {
+  addEvent(date:any,message:any) {
     const data = {
-      acno,
-      password,
-      amt
+      date,
+      message
     }
 
-    return this.http.post('http://localhost:3000/deposit',data,this.getOptions())
+    return this.http.post('http://localhost:3000/addevent',data,this.getOptions())
 
   }
 
@@ -64,25 +63,15 @@ getOptions(){
   return options
 }
 
-  //withdraw
-
-  withdraw(acno: any, password: any, amt: any) {
-    const data = {
-      acno,
-      password,
-      amt
-    }
-
-    return this.http.post('http://localhost:3000/withdraw',data,this.getOptions())
-  }
   
-//transaction
+  
+//event form
 
-  getTransaction(acno:any){
+  getEvent(uid:any){
     const data = {
-      acno
+      uid
     }
-    return this.http.post('http://localhost:3000/transaction',data,this.getOptions())
+    return this.http.post('http://localhost:3000/eventform',data,this.getOptions())
 
   }
 

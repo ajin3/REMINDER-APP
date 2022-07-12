@@ -14,12 +14,12 @@
                   
               </div>
               <div class="card-body">
-                  <form onsubmit="event.preventDefault();bank.authenticate()">
+                  <form [formGroup]="eventForm"(ngSubmit)="addevent()">
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="date" [(ngModel)]='date' placeholder="Event Date" id="entered_date" required>
+                          <input type="text" class="form-control" name="date" formControlName="date" placeholder="Event Date" id="entered_date" required>
                           
                       </div>
 
@@ -29,7 +29,7 @@
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fa fa-info"></i></span>
                           </div>
-                          <input type="text" class="form-control" name="description" [(ngModel)]='description' placeholder="Event Description" id="entered_description" required>
+                          <input type="text" class="form-control" name="message" formControlName="message" placeholder="Event Description" id="entered_description" required>
                       </div>
 
                       <br>
@@ -38,7 +38,7 @@
 
                         <input type="submit" value="VEIW EVENTS" (click)="veiwevent()" class="btn float-left login_btn " style="width:45%" >
 
-                         <input type="submit" value="ADD EVENT" (click)="addevent()" class="btn float-right login_btn " style="width:45%" >
+                         <input type="submit" value="ADD EVENT"  class="btn float-right login_btn " style="width:45%" >
 
                       </div>
                   </form>
