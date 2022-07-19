@@ -21,13 +21,16 @@
                           <input type="text" class="form-control" name="uid" formControlName="uid" placeholder="User I.D" id="login_user_id" required>
                           
                       </div>
+                      <div *ngIf="this.loginForm.get('uid')?.touched&&this.loginForm.get('uid')?.errors" style="color: red;">Invalid User I.D</div>
+
                       <div class="input-group form-group">
                           <div class="input-group-prepend">
                               <span class="input-group-text"><i class="fas fa-key"></i></span>
                           </div>
                           <input type="password" class="form-control" name="pswd" formControlName="pswd" placeholder="Password" id="login_password" required>
                       </div>
-                      
+                      <div *ngIf="this.loginForm.get('pswd')?.touched&&this.loginForm.get('pswd')?.errors" style="color: red;">Invalid Password</div>
+
                       <div class="form-group">
                         <br>
                           <input type="submit" value="LOG IN"  class="btn float-right login_btn " style="width:50%" >

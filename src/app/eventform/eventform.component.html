@@ -8,23 +8,19 @@
   <br>
 
   <table style="color: white;">
-      <thead>
-          <tr>
-              <th>Event Date</th>&nbsp;
-              <th>Event Description</th>
-          </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <th>11/2/21</th>&nbsp;
-            <th>car</th>
-        </tr>
-        <tr>
-            <th>12/3/21</th>&nbsp;
-            <th>bike</th>
-        </tr>
-       
-      </tbody>
+    <thead>
+      <tr>
+          <th>Date</th>&nbsp;
+          <th>Descreption</th>
+      </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+        <th>{{transaction.date}}</th>&nbsp;
+        <th>{{transaction.message}}</th>
+    </tr>  
+   
+  </tbody>
   </table>
   <br>
   <a routerLink="/dashboard" style="font-size: 20px; margin-left: 470px;margin-right: auto;">Home</a>

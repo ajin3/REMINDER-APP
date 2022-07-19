@@ -49,7 +49,7 @@ export class DataService {
       message
     }
 
-    return this.http.post('http://localhost:3000/addevent',data,this.getOptions())
+    return this.http.post('http://localhost:3000/addEvent',data,this.getOptions())
 
   }
 
@@ -67,19 +67,19 @@ getOptions(){
   
 //event form
 
-  getEvent(uid:any){
+  veiwEvent(uid:any){
     const data = {
       uid
     }
-    return this.http.post('http://localhost:3000/eventform',data,this.getOptions())
+    return this.http.post('http://localhost:3000/veiwEvent',data,this.getOptions())
 
   }
 
 //delete
 
-  deleteAcc(acno:any){
+  deleteAcc(uid:any){
    
-   return this.http.delete('http://localhost:3000/deleteAcc/'+acno,this.getOptions())
+   return this.http.delete('http://localhost:3000/deleteAcc/'+uid,this.getOptions())
   }
 
 }

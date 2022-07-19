@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../service/data.service';
 @Component({
   selector: 'app-dashboard',
@@ -10,23 +10,31 @@ import { DataService } from '../service/data.service';
 export class DashboardComponent implements OnInit {
 
 eventForm=this.fb.group({
+  date: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9/]*')]],
+  message: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]*')]],
 
-  date:[''],
-  message:['']
+ 
 })
-  constructor(private router:Router,private ds:DataService,private fb:FormBuilder) { }
+
+user: any
+lDate: any
+uid = ""
+
+  constructor(private router:Router,private ds:DataService,private fb:FormBuilder) {
+    this.lDate = new Date()
+   }
 
   ngOnInit(): void {
-    // if(!localStorage.getItem('loggedUser')){
-    //   alert("Please login")
-    //   this.router.navigateByUrl("")
-    // }
+    if(!localStorage.getItem("token")){
+      alert("Please login")
+      this.router.navigateByUrl("")
+    }
   }
 
   addevent(){
     var date = this.eventForm.value.date
     var message = this.eventForm.value.message
-
+    if (this.eventForm.valid) {
     this.ds.addEvent(date,message)
     .subscribe((result:any)=>{
       if(result){
@@ -37,19 +45,55 @@ eventForm=this.fb.group({
     },
     result=>{
       alert(result.error.message)
-    })
-    
+    }
+    )
+  }
+    else {
+      alert("Invalid Form")
+    }
   }
 
   veiwevent(){
-
+    alert("Veiwing Events...")
+    this.router.navigateByUrl('eventform')
   }
+
   
-  // signOut(){
-  //   localStorage.removeItem("loggedUser")
-  //   localStorage.removeItem("loggedUserId")
-  //   localStorage.removeItem("token")
-  //   this.router.navigateByUrl("")
-  // }
+  
+  signOut(){
+    localStorage.removeItem("currentUser")
+    localStorage.removeItem("currentUid")
+    localStorage.removeItem("token")
+    this.router.navigateByUrl("")
+  }
+
+
+  deleteAccount() {
+    this.uid = JSON.parse(localStorage.getItem("currentUid") || '')
+  }
+  cancel() {
+    this.uid = ""
+  }
+  onDelete(event: any) {
+    this.ds.deleteAcc(event)
+      .subscribe((result: any) => {
+        if (result) {
+          alert(result.message)
+          localStorage.removeItem("currentUser")
+          localStorage.removeItem("currentUId")
+          localStorage.removeItem("token")
+          this.router.navigateByUrl("")
+        }
+      },
+        result => {
+          alert(result.error.message)
+        }
+
+      )
+  }
+
+
+
+
 
 }
